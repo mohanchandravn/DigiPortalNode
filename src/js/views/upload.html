@@ -4,9 +4,45 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<div class="oj-hybrid-padding">
-  <h3>Upload Content Area</h3>
-  <div>
-      To change the content of this section, you will make edits to the upload.html file located in the /js/views folder.
-  </div>
-</div>
+<div id="uploadContainer">
+    
+    <div class="oj-flex oj-padding-lg-bottom"> 
+        <div class="oj-flex-item">
+            <h1>Upload a Document</h1>
+        </div>
+    </div>
+    
+    <div class="oj-flex"> 
+        <div class="oj-flex-item">
+            <label for="customer">Customer:</label>
+            <input id="customer" data-bind="ojComponent: { component: 'ojCombobox', options: customers, value: customer, placeholder: 'Select a Customer', rootAttributes: {style:'max-width:20em'}, required: true}"/>
+        </div>
+    </div>
+    
+    <div class="oj-flex oj-padding-top"> 
+        <div class="oj-flex-item">
+            <label for="invoiceNumber">Invoice Number:</label>
+            <input id="invoiceNumber" type="text" data-bind="ojComponent: { component: 'ojInputText', value: invoiceNumber, placeholder: 'Invoice Number', required: true }"/>   
+        </div>
+    </div>
+    
+    <div class="oj-flex oj-padding-vertical"> 
+        <div class="oj-flex-item">
+            <label for="invoiceDate">Invoice Date:</label>
+            <input id="invoiceDate" type="text" data-bind="ojComponent: { component: 'ojInputDate', value: invoiceDate, placeholder: 'Invoice Date', required: true }"/>   
+        </div>
+    </div>
+    
+    <div class="oj-flex oj-padding-top"> 
+        <div class="oj-flex-item">
+            <input type="file" data-bind="event: {change: onSelectFile}" accept=".doc, .docx, .pdf" />
+        </div>
+    </div>
+    
+    <div class="oj-flex oj-padding-lg-top"> 
+        <div class="oj-flex-item">
+            <button id="upload" data-bind="ojComponent: { component: 'ojButton', label: 'Upload'}, click: onUploadFile"></button>   
+        </div>
+    </div>    
+        
+</div>  

@@ -2,6 +2,7 @@
  * Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  * The Universal Permissive License (UPL), Version 1.0
  */
+
 'use strict';
 
 /**
@@ -57,27 +58,26 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
     
     $(function() {
 
-      function init() {
-        oj.Router.sync().then(
-          function () {
-            // Bind your ViewModel for the content of the whole page body.
-            ko.applyBindings(app, document.getElementById('globalBody'));
-          },
-          function (error) {
-            oj.Logger.error('Error in root start: ' + error.message);
-          }
-        );
-      }
+        function init() {
+            oj.Router.sync().then(
+                function () {
+                    // Bind your ViewModel for the content of the whole page body.
+                    ko.applyBindings(app, document.getElementById('globalBody'));
+                },
+                function (error) {
+                    oj.Logger.error('Error in root start: ' + error.message);
+                }
+            );
+        }
 
-      // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
-      // event before executing any code that might interact with Cordova APIs or plugins.
-      if ($(document.body).hasClass('oj-hybrid')) {
-        document.addEventListener("deviceready", init);
-      } else {
-        init();
-      }
+        // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
+        // event before executing any code that might interact with Cordova APIs or plugins.
+        if ($(document.body).hasClass('oj-hybrid')) {
+            document.addEventListener("deviceready", init);
+        } else {
+            init();
+        }
 
     });
     
-  }
-);
+});

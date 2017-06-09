@@ -7,7 +7,7 @@
 /**
  * login module
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojknockout-validation' 
+define(['ojs/ojcore', 'knockout', 'ojs/ojinputtext', 'ojs/ojbutton'
 ], function (oj, ko) {
     
     /**
@@ -25,7 +25,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojknoc
         self.onUserLogin = function() {
             console.log('User Name: ' + self.userName());
             console.log('Password: ' + self.password());
-            // TODO
+            // TODO - auth service call
             router.go('dashboard');
         };
         
