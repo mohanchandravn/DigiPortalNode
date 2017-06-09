@@ -7,8 +7,8 @@
 /**
  * search module
  */
-define(['ojs/ojcore', 'knockout'
-], function (oj, ko) {
+define(['ojs/ojcore', 'knockout', 'config/services'
+], function (oj, ko, service) {
     
     /**
      * The view model for the main content view template

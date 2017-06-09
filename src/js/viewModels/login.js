@@ -25,7 +25,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojinputtext', 'ojs/ojbutton'
         self.onUserLogin = function() {
             console.log('User Name: ' + self.userName());
             console.log('Password: ' + self.password());
+            
             // TODO - auth service call
+            
             router.go('dashboard');
         };
         
