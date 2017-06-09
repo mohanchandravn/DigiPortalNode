@@ -5,7 +5,7 @@
  */
 
 /**
- * upload module
+ * dashboard module
  */
 define(['ojs/ojcore', 'knockout'
 ], function (oj, ko) {
@@ -13,9 +13,9 @@ define(['ojs/ojcore', 'knockout'
     /**
      * The view model for the main content view template
      */
-    function uploadContentViewModel() {
+    function dashboardContentViewModel() {
         var self = this;
     }
     
-    return uploadContentViewModel;
+    return dashboardContentViewModel;
 });

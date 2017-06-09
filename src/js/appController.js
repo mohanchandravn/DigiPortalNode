@@ -17,7 +17,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
        // Router setup
        self.router = oj.Router.rootInstance;
        self.router.configure({
-         'search': {label: 'Search', isDefault: true},
+         'login': {label: 'Login', isDefault: true},
+         'dashboard': {label: 'Dashboard'},
+         'search': {label: 'Search'},
          'upload': {label: 'Upload'}
 //         'customers': {label: 'Customers'},
 //         'about': {label: 'About'}

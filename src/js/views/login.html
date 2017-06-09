@@ -1,0 +1,29 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div id="loginContainer">
+
+    <div class="oj-flex"> 
+        <div class="oj-flex-item">
+            <label for="text-input">User Name:</label>
+            <input id="text-input" type="text" data-bind="ojComponent: { component: 'ojInputText', value: userName, required: true }"/>   
+        </div>
+    </div>
+    
+    <div class="oj-flex"> 
+        <div class="oj-flex-item">
+            <label for="password">Password:</label>
+            <input id="password" type="password" data-bind="ojComponent: { component: 'ojInputPassword', value: password, required: true }"/>
+        </div>
+    </div>
+    
+    <div class="oj-flex oj-padding-lg-top"> 
+        <div class="oj-flex-item">
+            <button data-bind="ojComponent: { component: 'ojButton', label: 'Login'}, click: onUserLogin"></button>   
+        </div>
+    </div>
+    
+</div>
