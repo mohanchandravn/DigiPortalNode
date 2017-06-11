@@ -14,3 +14,4 @@ hybrid/plugins/*
 .DS_Store
 Thumbs.db
 /nbproject/private/
+/platforms/
