@@ -23,10 +23,11 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/services', 'ap
         self.password = ko.observable('');
         self.tracker = ko.observable();
         self.loginFailureText = ko.observable();
+        
         self.isLoggedinTrue = function () {
             router.go('search/');
-            //router.go('landing/');
         };
+        
         self._showComponentValidationErrors = function (trackerObj) {
             trackerObj.showMessages();
             if (trackerObj.focusOnFirstInvalid())
@@ -42,8 +43,10 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/services', 'ap
             if (!this._showComponentValidationErrors(trackerObj)) {
                 return;
             }
+            
             app.showPreloader();
-            var payLoad = {
+            
+            var payload = {
                 "username": self.userName(),
                 "password": self.password()
             };
@@ -63,14 +66,15 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/services', 'ap
                     app.userLogin(session.getFromSession(session.loggedInUser));
                 }
                 app.hidePreloader();
-
             };
+  
             var failCallBackFn = function (xhr) {
                 console.log("what's the status:" + xhr.status);
                 self.loginFailureText("Invalid Username or Password");
+                app.hidePreloader();
             };
 
-            services.login(payLoad).then(successCallBackFn, failCallBackFn);
+            services.login(payload).then(successCallBackFn, failCallBackFn);
         };
 
     }

@@ -6,9 +6,15 @@ and open the template in the editor.
 
 <div id="loginContainer" class="login-container">
 
-    <div class="oj-flex oj-padding-lg-bottom"> 
+    <div class="oj-flex"> 
         <div class="oj-flex-item">
             <h1>Login</h1>
+        </div>
+    </div>
+    
+    <div class="oj-flex invalid-user-text-container" data-bind="visible: loginFailureText() !== ''"> 
+        <div class="oj-flex-item">
+            <span data-bind="text: loginFailureText"></span>
         </div>
     </div>
 
@@ -16,8 +22,7 @@ and open the template in the editor.
         <div class="oj-flex-item">
             <label for="userName">User Name:</label>
             <input id="userName" type="text" data-bind="ojComponent: { component: 'ojInputText', value: userName, placeholder: 'User Name', required: true, invalidComponentTracker: tracker,
-                                                 translations: {'required': {
-                                                                         messageDetail: 'Please enter a valid user name'}} }"/>   
+                                                translations: {'required': { messageDetail: 'Please enter a valid user name'}} }"/>   
         </div>
     </div>
 
@@ -25,13 +30,10 @@ and open the template in the editor.
         <div class="oj-flex-item">
             <label for="password">Password:</label>
             <input id="password" type="password" data-bind="ojComponent: { component: 'ojInputPassword', value: password, placeholder: 'Password', required: true, invalidComponentTracker: tracker,
-                                                translations: {'required': {messageDetail: 'Please enter the password'}} }"/>
+                                                    translations: {'required': {messageDetail: 'Please enter the password'}} }"/>
         </div>
     </div>
-    <div class="oj-flex-item invalidusertextcontainer" data-bind="visible: loginFailureText() !== ''">
-        <span data-bind="text: loginFailureText"></span>
-    </div>
-
+  
     <div class="oj-flex oj-padding-lg-top oj-"> 
         <div class="oj-flex-item">
             <button id="userLogin" class="oj-lg-12" data-bind="ojComponent: { component: 'ojButton', label: 'Login'}, click: onUserLogin"></button>   

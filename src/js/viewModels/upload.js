@@ -7,8 +7,8 @@
 /**
  * upload module
  */
-define(['ojs/ojcore', 'knockout', 'config/services', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
-], function (oj, ko, service) {
+define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
+], function (oj, ko, services, app) {
     
     /**
      * The view model for the main content view template
@@ -34,16 +34,19 @@ define(['ojs/ojcore', 'knockout', 'config/services', 'ojs/ojselectcombobox', 'oj
         };
         
         self.onUploadDocument = function(data, event) {
+            app.showPreloader();
             
             var uploadDocumentSuccessCbFn = function (data, status) {
                 console.log('Document uploaded successfully!');
+                app.hidePreloader();
             };
 
             var uploadDocumentFailCbFn = function (xhr) {
                 console.log(xhr);
+                app.hidePreloader();
             };
         
-            service.uploadDocument(self.selectedFile(), self.invoiceNumber()).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
+            services.uploadDocument(self.selectedFile(), self.invoiceNumber()).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
         };
         
     }
