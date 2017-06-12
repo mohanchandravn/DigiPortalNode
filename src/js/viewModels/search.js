@@ -37,6 +37,9 @@ define(['knockout',
                 service.searchDocuments().then(searchSuccessFn, failCallBackFn);
             }
         };
+        self.downloadDoc = function(id, version) {
+            console.log("id : " +id + "  Version : "  + version);
+        };
          var failCallBackFn = function (xhr) {
             console.log(xhr);
             app.hidePreloader();

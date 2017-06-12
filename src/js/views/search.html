@@ -52,7 +52,7 @@ and open the template in the editor.
                                                   {headerText: 'Modified Date',
                                                    style: 'width: 10%',
                                                    sortProperty: 'modifiedTime'},
-                                           {headerText: 'Type',
+                                                  {headerText: 'Type',
                                                    style: 'width: 10%',
                                                    sortProperty: 'type'}],
                                                    rowTemplate: 'records_row_template', 
@@ -63,23 +63,26 @@ and open the template in the editor.
     <div class="oj-hybrid-padding"></div>
     <div class="oj-hybrid-padding"></div>
 
-<script type="text/html" id="records_row_template">
-    <tr data-bind="click: $parent.getRecord">
-        <td data-bind="text: sNo">
-        </td>
-        <td data-bind="text: name">
-        </td>
-        <td data-bind="text: version">
-        </td>
-        <td data-bind="text: createdTime">
-        </td>
-        <td data-bind="text: modifiedTime">
-        </td>
-        <td>
-            <div style="max-height: 15px;max-width: 15px;">
-                <img class="logo" data-bind="attr: {src:typeImage}" alt="Item Type" />
-            </div>
-        </td>
-    </tr>
-</script>
+    <script type="text/html" id="records_row_template">
+        <tr data-bind="click: $parent.getRecord">
+            <td data-bind="text: sNo">
+            </td>
+            <td data-bind="text: name">
+            </td>
+            <td data-bind="text: version">
+            </td>
+            <td data-bind="text: createdTime">
+            </td>
+            <td data-bind="text: modifiedTime">
+            </td>
+            <td>
+                <div style="max-height: 15px;max-width: 15px;">
+                    <img class="logo" data-bind="attr: {src:typeImage}" alt="Item Type" />
+                </div>
+            </td>
+            <td>
+                <a data-bind="click: $parent.downloadDoc(id,version)">Download</a>
+            </td>
+        </tr>
+    </script>
 </div>

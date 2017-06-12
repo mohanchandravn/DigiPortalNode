@@ -32,7 +32,7 @@ requirejs.config(
                                 'customElements': 'libs/webcomponents/CustomElements',
                                 'proj4': 'libs/proj4js/dist/proj4-src',
                                 'css': 'libs/require-css/css',
-                                'moment': 'libs/moment/moment-with-locales-2.18.1.min'
+                                'moment': 'libs/moment/min/moment-with-locales.min'
                             }
                     //endinjector
                     ,
