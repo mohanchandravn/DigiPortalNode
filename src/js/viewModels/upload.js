@@ -7,7 +7,7 @@
 /**
  * upload module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/services', 'appController', 'utils/commonHelper', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/services', 'appController', 'config/utils/commonhelper', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
 ], function (oj, $, ko, services, app, commonHelper) {
     
     /**
@@ -18,11 +18,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/services', 'appController', 
         var self = this;
         
         self.customers = ko.observableArray([
-            {value: '1', label: 'Customer 1'},
-            {value: '2', label: 'Customer 2'},
-            {value: '3', label: 'Customer 3'},
-            {value: '4', label: 'Customer 4'},
-            {value: '5', label: 'Customer 5'}
+            {value: '1', label: 'Bugatti'},
+            {value: '2', label: 'Audi'},
+            {value: '3', label: 'Mercedes'},
+            {value: '4', label: 'Cadillac'},
+            {value: '5', label: 'Porsche'}
         ]);
         self.customer = ko.observable('');
         self.invoiceNumber = ko.observable('');

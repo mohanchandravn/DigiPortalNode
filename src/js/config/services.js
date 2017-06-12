@@ -22,7 +22,7 @@ define(['knockout', 'config/serviceConfig'
         } else {
             self.portalRestHost = ko.observable("https://docsportalservices-inoracless38727.apaas.us2.oraclecloud.com".concat(ctx));
         }
-        
+//        self.portalRestHost = ko.observable("https://docsportalservices-inoracless38727.apaas.us2.oraclecloud.com".concat(ctx));
         self.login = function(payload) {
             var serviceURL = self.portalRestHost() + "/login";
             return serviceConfig.authenticatePost(serviceURL, payload, serviceConfig.contentTypeFormUrlEncoded);

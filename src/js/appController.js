@@ -6,7 +6,7 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource'],
+define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/serviceConfig', 'config/services', 'config/utils/commonhelper', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource'],
         function (oj, ko, session) {
 
             function ControllerViewModel() {
@@ -60,6 +60,12 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'ojs/ojrouter', 'ojs/o
                     $("#routingContainer").css("pointer-events", "");
                     $("#routingContainer").css("opacity", "");
                 };
+                
+                self.logout = function () {
+                    session.removeAllFromSession();
+                    self.router.go('login/');
+                    window.location.reload();
+                }
 
                 //restricting direct access without login
                 if (self.router) {

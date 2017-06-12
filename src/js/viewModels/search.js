@@ -28,7 +28,6 @@ define(['knockout',
         self.recordsDatasource = ko.observable();
 
         self.searchDocs = function (data, event) {
-//            self.clearRecord();
             if (self.invoiceNumber() !== '') {
                 app.showPreloader();
                 service.searchDocuments(self.invoiceNumber()).then(searchSuccessFn, failCallBackFn);
@@ -45,7 +44,7 @@ define(['knockout',
             app.hidePreloader();
         };
         var searchSuccessFn = function (data, status) {
-            if (status !== 'nocontent') {
+            if (status && status !== 'nocontent') {
                 console.log(data);
                 var array = [];
                 var item;
