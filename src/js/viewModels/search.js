@@ -51,6 +51,7 @@ define(['knockout',
                     array.push({
                         sNo: idx + 1,
                         type: item.type,
+                        typeImage : item.type === 'file' ? 'css/images/file_1.svg' : 'css/images/folder.svg',
                         name: item.name,
                         createdTime: item.createdTime,
                         modifiedTime: item.modifiedTime,
