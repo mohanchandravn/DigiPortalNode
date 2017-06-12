@@ -7,8 +7,8 @@
 /**
  * upload module
  */
-define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'utils/commonHelper', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
-], function (oj, ko, services, app, commonHelper) {
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/services', 'appController', 'utils/commonHelper', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
+], function (oj, $, ko, services, app, commonHelper) {
     
     /**
      * The view model for the main content view template
@@ -28,7 +28,9 @@ define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'utils/com
         self.invoiceNumber = ko.observable('');
         self.invoiceDate = ko.observable('');
         self.selectedFile = ko.observable();
-        
+        self.isUploadSuccess = ko.observable(false);
+        self.uploadStatusDesc = ko.observable('');
+
         self.onSelectFile = function(data, event) {
             self.selectedFile(event.target.files[0]);
         };
@@ -37,17 +39,22 @@ define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'utils/com
             app.showPreloader();
             
             var uploadDocumentSuccessCbFn = function (data, status) {
-                console.log('Document uploaded successfully!');
+                self.isUploadSuccess(true);
+                self.uploadStatusDesc('Document uploaded successfully!');
                 app.hidePreloader();
             };
 
             var uploadDocumentFailCbFn = function (xhr) {
+                self.isUploadSuccess(false);
+                self.uploadStatusDesc('Failed to upload document!');
                 console.log(xhr);
                 app.hidePreloader();
             };
             
-            var invoiceDate = commonHelper.formatDateStr(self.invoiceDate(), 'YYYY-MM-DD');        
-            services.uploadDocument(self.selectedFile(), self.invoiceNumber(), invoiceDate).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
+            var formData = new FormData();
+            formData.append('primaryFile', self.selectedFile());
+            var invoiceDate = commonHelper.formatDateStr(self.invoiceDate(), 'MM/DD/YYYY');    
+            services.uploadDocument(formData, self.customer(), self.invoiceNumber(), invoiceDate).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
         };
         
     }

@@ -28,8 +28,8 @@ define(['knockout', 'config/serviceConfig'
             return serviceConfig.authenticatePost(serviceURL, payload, serviceConfig.contentTypeFormUrlEncoded);
         };
         
-        self.uploadDocument = function (document, invoiceNumber, invoiceDate) {
-            var serviceURL = self.portalRestHost() + "/docs/upload/uploadFile?invoiceNumber=" + invoiceNumber + "&invoiceDate=" + invoiceDate;
+        self.uploadDocument = function (document, companyName, invoiceNumber, invoiceDate) {
+            var serviceURL = self.portalRestHost() + "/docs/upload/uploadFile?companyName=" + companyName + "&invoiceNumber=" + invoiceNumber + "&invoiceDate=" + invoiceDate;
             return serviceConfig.callPostService(serviceURL, document, serviceConfig.contentTypeMultipartFormData);
         };
 

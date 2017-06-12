@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-define(['jquery', 'config/sessionConfig'
-], function ($, sessionConfig) {
+define(['jquery', 'config/sessionConfig', 'utils/commonhelper'
+], function ($, sessionConfig, commonHelper) {
 
     /**
      * The view model for managing service calls
@@ -40,6 +40,13 @@ define(['jquery', 'config/sessionConfig'
 
         self.callPostService = function (serviceUrl, payload, contentType) {
             var payloadStr = JSON.stringify(payload);
+            var cType = contentType;
+            var pData = true;
+            if (cType === self.contentTypeMultipartFormData) {
+                payloadStr = payload;
+                cType = false;
+                pData = false;
+            }
             console.log('Payload : '+ payloadStr);
             var defer = $.Deferred();
             $.ajax({
@@ -48,7 +55,8 @@ define(['jquery', 'config/sessionConfig'
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionConfig.getFromSession(sessionConfig.accessToken));
                 },
-                contentType: contentType,
+                processData: pData,
+                contentType: cType,
                 data: payloadStr,
                 success: function (data) {
                     console.log('Successfully posted data at: ' + serviceUrl);

@@ -12,10 +12,17 @@ and open the template in the editor.
         </div>
     </div>
     
+    <div class="oj-flex invalid-user-text-container" data-bind="visible: uploadStatusDesc() !== ''"> 
+        <div class="oj-flex-item">
+            <span data-bind="text: uploadStatusDesc, css: isUploadSuccess() ? 'successMessage' : 'failureMsg'"></span>
+        </div>
+    </div>
+    
     <div class="oj-flex"> 
         <div class="oj-flex-item">
             <label for="customer">Customer:</label>
-            <input id="customer" data-bind="ojComponent: { component: 'ojCombobox', options: customers, value: customer, placeholder: 'Select a Customer', rootAttributes: {style:'max-width:18em'}, required: true}"/>
+            <input id="customer" data-bind="ojComponent: { component: 'ojCombobox', options: customers, rawValue: customer, 
+                placeholder: 'Select a Customer', rootAttributes: {style:'max-width:18em'}, required: true}"/>
         </div>
     </div>
     
