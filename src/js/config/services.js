@@ -34,7 +34,10 @@ define(['knockout', 'config/serviceConfig'
         };
 
         self.searchDocuments = function (invoiceNumber) {
-            var serviceURL = self.portalRestHost() + "/docs/search/searchFiles?invoiceNumber=" + invoiceNumber;
+            var serviceURL = self.portalRestHost() + "/docs/search/searchFiles?invoiceNumber=";
+            if (invoiceNumber) {
+              serviceURL = serviceURL + invoiceNumber;  
+            }
             return serviceConfig.callGetService(serviceURL);
         };
 
