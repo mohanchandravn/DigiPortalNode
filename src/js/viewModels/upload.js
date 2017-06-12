@@ -7,8 +7,8 @@
 /**
  * upload module
  */
-define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
-], function (oj, ko, services, app) {
+define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'utils/commonHelper', 'ojs/ojselectcombobox', 'ojs/ojinputtext', 'ojs/ojdatetimepicker', 'ojs/ojbutton'
+], function (oj, ko, services, app, commonHelper) {
     
     /**
      * The view model for the main content view template
@@ -32,7 +32,7 @@ define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'ojs/ojsel
         self.onSelectFile = function(data, event) {
             self.selectedFile(event.target.files[0]);
         };
-        
+              
         self.onUploadDocument = function(data, event) {
             app.showPreloader();
             
@@ -45,8 +45,9 @@ define(['ojs/ojcore', 'knockout', 'config/services', 'appController', 'ojs/ojsel
                 console.log(xhr);
                 app.hidePreloader();
             };
-        
-            services.uploadDocument(self.selectedFile(), self.invoiceNumber()).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
+            
+            var invoiceDate = commonHelper.formatDateStr(self.invoiceDate(), 'YYYY-MM-DD');        
+            services.uploadDocument(self.selectedFile(), self.invoiceNumber(), invoiceDate).then(uploadDocumentSuccessCbFn, uploadDocumentFailCbFn);
         };
         
     }

@@ -69,7 +69,7 @@ define(['jquery', 'config/sessionConfig'
                 url: serviceUrl,
                 dataType: "json",
                 beforeSend: function (request) {
-                    request.setRequestHeader("Portal-Type", "user");
+                    request.setRequestHeader("Portal-Type", "admin");
                 },
                 transformRequest: function (obj) {
                     var str = [];
