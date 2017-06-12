@@ -47,11 +47,14 @@ and open the template in the editor.
                                                    style: 'width: 5%',
                                                    sortProperty: 'version'},
                                                   {headerText: 'Created Date',
-                                                   style: 'width: 15%',
+                                                   style: 'width: 10%',
                                                    sortProperty: 'createdTime'},
                                                   {headerText: 'Modified Date',
-                                                   style: 'width: 15%',
-                                                   sortProperty: 'modifiedTime'}],
+                                                   style: 'width: 10%',
+                                                   sortProperty: 'modifiedTime'},
+                                           {headerText: 'Type',
+                                                   style: 'width: 10%',
+                                                   sortProperty: 'type'}],
                                                    rowTemplate: 'records_row_template', 
                                         rootAttributes: {'style':'min-width: 300px; width: 100%;'}}">
         </table>
@@ -71,6 +74,11 @@ and open the template in the editor.
         <td data-bind="text: createdTime">
         </td>
         <td data-bind="text: modifiedTime">
+        </td>
+        <td>
+            <div style="max-height: 15px;max-width: 15px;">
+                <img class="logo" data-bind="attr: {src:typeImage}" alt="Item Type" />
+            </div>
         </td>
     </tr>
 </script>
