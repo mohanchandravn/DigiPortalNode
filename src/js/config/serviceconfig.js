@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-define(['jquery'
-], function ($) {
+define(['jquery', 'config/sessionConfig'
+], function ($, session) {
 
     /**
      * The view model for managing service calls
@@ -24,7 +24,7 @@ define(['jquery'
                 type: "GET",
                 url: serviceUrl,
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZXhpLWNsb3VkLWp3dCIsInN1YiI6ImphY2siLCJpYXQiOjE0OTcwMTYwNTksImV4cCI6MTQ5NzAyMzI1OX0.TDS73CFpJNFvP1rUzsEVJ793o5E_Ky4nVDbcxErwVj9Sr3PuTqEWYQJJPrMnWN3dAPZNLIfnFVoYwfJNlIb9bg");
+                    request.setRequestHeader("Authorization", "Bearer " + session.getFromSession(session.accessToken));
                 },
                 success: function (data) {
                     console.log('Successfully retrieved details at: ' + serviceUrl);
@@ -69,7 +69,7 @@ define(['jquery'
                 url: serviceUrl,
                 dataType: "json",
                 beforeSend: function (request) {
-                    request.setRequestHeader("Portal-Type", "user");
+                    request.setRequestHeader("Portal-Type", "admin");
                 },
                 transformRequest: function (obj) {
                     var str = [];

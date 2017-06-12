@@ -5,11 +5,73 @@ and open the template in the editor.
 -->
 
 <div id="searchContainer">
-    
-    <div class="oj-flex oj-padding-lg-bottom"> 
-        <div class="oj-flex-item">
-            <h1>Search Documents</h1>
+
+    <div class="oj-flex">
+        <div class="manageEmailsSearchContainer oj-sm-12 oj-flex-item">
+            <div class="oj-flex">
+                <div class="oj-flex-item" >
+                    <label class="selection-label" for="userId" data-bind="text: 'Invoice Number: '"></label>
+                    <input id="userId" type="text" data-bind="ojComponent: {
+                                                    component: 'ojInputText',
+                                                    placeholder: 'Invoice Number',
+                                                    value: invoiceNumber
+                }" />
+                </div>
+            </div>
+            <div class="oj-flex-bar">
+                <div class="oj-flex-bar-start">
+                    <button data-bind="click: searchDocs, ojComponent: {
+                                        component: 'ojButton',
+                                        label: 'Search'
+                    }">
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    
+
+    <div class="oj-margin-lg-vertical oj-flex">
+        <table id="recordsTable" summary="Document List" aria-label="Documents Table"
+               data-bind="ojComponent: {component: 'ojTable',
+                                        display: 'grid',
+                                        data: recordsDatasource,
+                                        emptyText: 'No records to display.',
+                                        dnd: {reorder: {columns: 'enabled'}},
+                                        columns: [{headerText: 'Serial No',
+                                                   style: 'width: 5%',
+                                                   sortProperty: 'sNo'},
+                                                  {headerText: 'Document Name',
+                                                   style: 'width: 60%',
+                                                   sortProperty: 'name'},
+                                                  {headerText: 'Version',
+                                                   style: 'width: 5%',
+                                                   sortProperty: 'version'},
+                                                  {headerText: 'Created Date',
+                                                   style: 'width: 15%',
+                                                   sortProperty: 'createdTime'},
+                                                  {headerText: 'Modified Date',
+                                                   style: 'width: 15%',
+                                                   sortProperty: 'modifiedTime'}],
+                                                   rowTemplate: 'records_row_template', 
+                                        rootAttributes: {'style':'min-width: 300px; width: 100%;'}}">
+        </table>
+        <div data-bind="ojComponent: {component: 'ojPagingControl', data: recordsDatasource, pageSize: 10}"></div>
+    </div>
+    <div class="oj-hybrid-padding"></div>
+    <div class="oj-hybrid-padding"></div>
+
+<script type="text/html" id="records_row_template">
+    <tr data-bind="click: $parent.getRecord">
+        <td data-bind="text: sNo">
+        </td>
+        <td data-bind="text: name">
+        </td>
+        <td data-bind="text: version">
+        </td>
+        <td data-bind="text: createdTime">
+        </td>
+        <td data-bind="text: modifiedTime">
+        </td>
+    </tr>
+</script>
 </div>
