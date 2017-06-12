@@ -39,23 +39,24 @@ and open the template in the editor.
                                         dnd: {reorder: {columns: 'enabled'}},
                                         columns: [{headerText: 'Serial No',
                                                    style: 'width: 5%',
-                                                   sortProperty: 'sNo'},
+                                                   field: 'sNo'},
                                                   {headerText: 'Document Name',
                                                    style: 'width: 60%',
-                                                   sortProperty: 'name'},
+                                                   field: 'name'},
                                                   {headerText: 'Version',
                                                    style: 'width: 5%',
-                                                   sortProperty: 'version'},
+                                                   field: 'version'},
                                                   {headerText: 'Created Date',
                                                    style: 'width: 10%',
-                                                   sortProperty: 'createdTime'},
+                                                   field: 'createdTime'},
                                                   {headerText: 'Modified Date',
                                                    style: 'width: 10%',
-                                                   sortProperty: 'modifiedTime'},
+                                                   field: 'modifiedTime'},
                                                   {headerText: 'Type',
                                                    style: 'width: 10%',
-                                                   sortProperty: 'type'}],
-                                                   rowTemplate: 'records_row_template', 
+                                                   renderer: fileTypeRender}
+                                               ],
+                                                   
                                         rootAttributes: {'style':'min-width: 300px; width: 100%;'}}">
         </table>
         <div data-bind="ojComponent: {component: 'ojPagingControl', data: recordsDatasource, pageSize: 10}"></div>
@@ -63,26 +64,5 @@ and open the template in the editor.
     <div class="oj-hybrid-padding"></div>
     <div class="oj-hybrid-padding"></div>
 
-    <script type="text/html" id="records_row_template">
-        <tr data-bind="click: $parent.getRecord">
-            <td data-bind="text: sNo">
-            </td>
-            <td data-bind="text: name">
-            </td>
-            <td data-bind="text: version">
-            </td>
-            <td data-bind="text: createdTime">
-            </td>
-            <td data-bind="text: modifiedTime">
-            </td>
-            <td>
-                <div style="max-height: 25px;max-width: 25px;">
-                    <img class="logo" data-bind="attr: {src:typeImage}" alt="Item Type" />
-                </div>
-            </td>
-            <td>
-                <a data-bind="click: $parent.downloadDoc(id,version)">Download</a>
-            </td>
-        </tr>
-    </script>
+
 </div>

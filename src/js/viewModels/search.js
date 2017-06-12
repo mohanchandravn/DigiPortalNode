@@ -36,10 +36,27 @@ define(['knockout',
                 service.searchDocuments().then(searchSuccessFn, failCallBackFn);
             }
         };
-        self.downloadDoc = function(id, version) {
-            console.log("id : " +id + "  Version : "  + version);
+        self.downloadDoc = function (id, version) {
+            console.log("id : " + id + "  Version : " + version);
         };
-         var failCallBackFn = function (xhr) {
+
+        self.downlooadLinkRenderer = function (context) {
+            var link = $(document.createElement('span'));
+            link.attr('data-bind' , 'click: downloadDoc(' + context.row.id + ', ' + context.row.version + ')');
+            link.append('Download');
+            $(context.cellContext.parentElement).append(link);
+        };
+
+        self.fileTypeRender = function (context) {
+            var sDiv = $(document.createElement('div'));
+            sDiv.attr('style', 'max-height: 25px;max-width: 25px;');
+
+            var imageTag = $(document.createElement('img'));
+            imageTag.attr('src', context.row.typeImage);
+            sDiv.append(imageTag);
+            $(context.cellContext.parentElement).append(sDiv);
+        };
+        var failCallBackFn = function (xhr) {
             console.log(xhr);
             app.hidePreloader();
         };
@@ -53,7 +70,7 @@ define(['knockout',
                     array.push({
                         sNo: idx + 1,
                         type: item.type,
-                        typeImage : item.type === 'file' ? 'css/images/file_1.svg' : 'css/images/folder.svg',
+                        typeImage: item.type === 'file' ? 'css/images/file_1.svg' : 'css/images/folder.svg',
                         name: item.name,
                         createdTime: item.createdTime,
                         modifiedTime: item.modifiedTime,
