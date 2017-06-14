@@ -30,7 +30,7 @@
     -webkit-animation: spin 1.7s linear infinite;
     animation: spin 1.7s linear infinite;
 }
-    
+
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -54,4 +54,13 @@
 
 .failureMessage {
     color: red;
+}
+
+.docDwldSpan {
+    background:url(images/cloud-computing.svg) left top; 
+    width:25px; 
+    height:25px;
+    display: block;
+    float: left;
+    cursor: pointer;
 }

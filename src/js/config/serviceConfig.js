@@ -18,6 +18,7 @@ define(['jquery', 'config/sessionConfig'
         self.contentTypeApplicationJSON = 'application/json';
         self.contentTypeMultipartFormData = 'multipart/form-data';
         self.contentTypeFormUrlEncoded = 'application/x-www-form-urlencoded';
+        self.contentTypeDownloadFile = 'application/*';
  
         self.callGetService = function (serviceUrl) {
             var defer = $.Deferred();
@@ -98,6 +99,55 @@ define(['jquery', 'config/sessionConfig'
                 }
             });
             return $.when(defer);
+        };
+        
+        self.downloadFile = function (serviceUrl) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', serviceUrl);
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionConfig.getFromSession(sessionConfig.accessToken));
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function () {
+                if (this.status == '200') {
+                    var filename = '';
+                    //get the filename from the header.
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(disposition);
+                        if (matches !== null && matches[1])
+                            filename = matches[1].replace(/['"]/g, '');
+                    }
+                    var type = xhr.getResponseHeader('Content-Type');
+                    var blob = new Blob([this.response], {type: type});
+                    //workaround for IE
+                    if (typeof window.navigator.msSaveBlob != 'undefined') {
+                        window.navigator.msSaveBlob(blob, filename);
+                    } else {
+                        var URL = window.URL || window.webkitURL;
+                        var download_URL = URL.createObjectURL(blob);
+                        if (filename) {
+                            var a_link = document.createElement('a');
+                            if (typeof a_link.download == 'undefined') {
+                                window.location = download_URL;
+                            } else {
+                                a_link.href = download_URL;
+                                a_link.download = filename;
+                                document.body.appendChild(a_link);
+                                a_link.click();
+                            }
+                        } else {
+                            window.location = download_URL;
+                        }
+                        setTimeout(function () {
+                            URL.revokeObjectURL(download_URL);
+                        }, 10000);
+                    }
+                } else {
+                    alert('Error when downloading the file');
+                }
+            };
+            xhr.setRequestHeader('Content-type', self.contentTypeDownloadFile);
+            xhr.send();
         };
         
     }

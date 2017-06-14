@@ -8,7 +8,7 @@
  * search module
  */
 define(['knockout',
-    'config/services', 'appController',
+    'config/services', 'appController', 'config/sessionConfig',
     'ojs/ojcore',
     'jquery',
     'ojs/ojtable',
@@ -17,7 +17,7 @@ define(['knockout',
     'ojs/ojpagingtabledatasource',
     'ojs/ojcollectiontabledatasource',
     'ojs/ojswitch'
-], function (ko, service, app, oj) {
+], function (ko, service, app, sessionConfig, oj, $) {
 
     /**
      * The view model for the main content view template
@@ -26,7 +26,6 @@ define(['knockout',
         var self = this;
         self.invoiceNumber = ko.observable('');
         self.recordsDatasource = ko.observable();
-
         self.searchDocs = function (data, event) {
             if (self.invoiceNumber() !== '') {
                 app.showPreloader();
@@ -39,18 +38,21 @@ define(['knockout',
         self.downloadDoc = function (id, version) {
             console.log("id : " + id + "  Version : " + version);
         };
-
         self.downlooadLinkRenderer = function (context) {
-            var link = $(document.createElement('span'));
-            link.attr('data-bind' , 'click: downloadDoc(' + context.row.id + ', ' + context.row.version + ')');
-            link.append('Download');
-            $(context.cellContext.parentElement).append(link);
-        };
+            if (context.row.type === 'file') {
+                var link = $(document.createElement('span'));
+//            link.attr('data-bind' , 'click: downloadDoc(' + context.row.id + ', ' + context.row.version + ')');
+//                link.append('Download');
+                link.attr('class', 'docDwldSpan');
+                link.attr('docId', context.row.id);
+                link.attr('docVersion', context.row.version);
+                $(context.cellContext.parentElement).append(link);
+            }
 
+        };
         self.fileTypeRender = function (context) {
             var sDiv = $(document.createElement('div'));
             sDiv.attr('style', 'max-height: 25px;max-width: 25px;');
-
             var imageTag = $(document.createElement('img'));
             imageTag.attr('src', context.row.typeImage);
             sDiv.append(imageTag);
@@ -88,8 +90,12 @@ define(['knockout',
                 app.hidePreloader();
             }
         };
-
+        $(document).on('click', '.docDwldSpan', function () {
+            var spanElm = $(this);
+            var docId = spanElm.attr('docId');
+            var docVersion = spanElm.attr('docVersion');
+            service.downloadDocument(docId, docVersion);
+        });
     }
-
     return searchContentViewModel;
 });
