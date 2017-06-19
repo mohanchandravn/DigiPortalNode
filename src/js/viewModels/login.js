@@ -60,10 +60,13 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/services', 'ap
                     session.setToSession(session.expiresIn, data.expires_in);
                     session.setToSession(session.isLoggedInUser, true);
                     session.setToSession(session.loggedInUser, data.userId);
-                    session.setToSession(session.portalRole, data.portalRole);
+                    session.setToSession(session.loggedInUserRole, data.userRole);
                     self.isLoggedinTrue();
                     app.isLoggedInUser(session.getFromSession(session.isLoggedInUser));
                     app.userLogin(session.getFromSession(session.loggedInUser));
+                    app.loggedInUserRole(session.getFromSession(session.loggedInUserRole));
+                    app.setNavigationSource();
+                    
                 }
                 app.hidePreloader();
             };

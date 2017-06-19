@@ -20,7 +20,7 @@ define(['knockout', 'config/serviceConfig'
                 self.portalRestHost = ko.observable("http://localhost:8080".concat(ctx));
             } 
         } else {
-            self.portalRestHost = ko.observable("https://docsportalservices-inoracless38727.apaas.us2.oraclecloud.com".concat(ctx));
+            self.portalRestHost = ko.observable("https://digiportalservices-inoracless38727.apaas.us2.oraclecloud.com".concat(ctx));
         }
         self.login = function(payload) {
             var serviceURL = self.portalRestHost() + "/login";

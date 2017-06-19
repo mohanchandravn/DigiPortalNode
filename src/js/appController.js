@@ -27,13 +27,16 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/serviceConfig'
                     'upload': {label: 'Upload'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
+                self.setNavigationSource = function () {
+                    if (self.userLogin()) {
+                        var navData = [{name: 'Search', id: 'search', iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'}];
+                        if (self.loggedInUserRole() === 'ADMIN') {
+                            navData.push({name: 'Upload', id: 'upload', iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'});
+                        }
+                        $('#primaryNav').ojNavigationList({"data": new oj.ArrayTableDataSource(navData, {idAttribute: 'id'}), "selection": self.getStateId()});
+                    }
+                }
 
-                // Navigation setup
-                var navData = [
-                    {name: 'Search', id: 'search', iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
-                    {name: 'Upload', id: 'upload', iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'}
-                ];
-                self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
 
                 // Header
                 // Application Name used in Branding Area
@@ -43,11 +46,10 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/serviceConfig'
 
                 self.isLoggedInUser = ko.observable(session.getFromSession(session.isLoggedInUser));
 
-                self.loggedInUserRole = ko.observable();
+                self.loggedInUserRole = ko.observable(session.getFromSession(session.loggedInUserRole));
                 self.getStateId = function () {
                     return self.router.currentState().id;
                 };
-
 
                 self.showPreloader = function () {
                     $("#preloader").removeClass("oj-sm-hide");
@@ -60,7 +62,7 @@ define(['ojs/ojcore', 'knockout', 'config/sessionConfig', 'config/serviceConfig'
                     $("#routingContainer").css("pointer-events", "");
                     $("#routingContainer").css("opacity", "");
                 };
-                
+
                 self.logout = function () {
                     session.removeAllFromSession();
                     self.router.go('login/');

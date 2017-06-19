@@ -90,9 +90,9 @@
                 </div>
             </div>
             <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
-                <div data-bind="ojComponent: {component: 'ojNavigationList',
+                <div id="primaryNav" data-bind="ojComponent: {component: 'ojNavigationList',
                         navigationLevel: 'application', display: smScreen() ? 'icons' : 'all',
-                        item: {template: 'navTemplate'}, data: navDataSource,
+                        item: {template: 'navTemplate'},
                         selection: router.stateId, edge: 'top'},
                         css: smScreen() ? '' : 'oj-md-condense oj-md-justify-content-flex-end',  visible: isLoggedInUser">
                 </div>

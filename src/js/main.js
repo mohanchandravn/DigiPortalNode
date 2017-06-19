@@ -80,4 +80,7 @@ requirejs.config(
                             init();
                         }
                     });
+                         $(document).ready(function () {
+                             app.setNavigationSource();
+                         });
                 });
